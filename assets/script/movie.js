@@ -98,22 +98,22 @@ function randomMovie() {
                         
                         // appending movie actor poster
                         $('#img_actor1').append(`
-                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[0].profile_path}" class="card-img-top" alt="..." style="max-width: fit-content; max-height:175px; border-radius:10px;">
+                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[0].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
                              `);
                         $('#img_actor2').append(`
-                             <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[1].profile_path}" class="card-img-top" alt="..." style="max-width: fit-content; max-height:175px; border-radius:10px;">
+                             <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[1].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
                               `);
                         $('#img_actor3').append(`
-                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[2].profile_path}" class="card-img-top" alt="..." style="max-width: fit-content; max-height:175px; border-radius:10px;">
+                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[2].profile_path}" class="card-img-top" alt="..."  onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
                              `);
                         $('#img_actor4').append(`
-                             <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[3].profile_path}" class="card-img-top" alt="..." style="max-width: fit-content; max-height:175px; border-radius:10px;">
+                             <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[3].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
                               `);
                         $('#img_actor5').append(`
-                              <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[4].profile_path}" class="card-img-top" alt="..." style="max-width: fit-content; max-height:175px; border-radius:10px;">
+                              <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[4].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
                                `);
                         $('#img_actor6').append(`
-                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[5].profile_path}" class="card-img-top" alt="..." style="max-width: fit-content; max-height:175px; border-radius:10px;">
+                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[5].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
                             `);
 
                         //appending  trailer from youtube
