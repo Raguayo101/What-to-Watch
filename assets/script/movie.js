@@ -18,7 +18,7 @@ $(document).ready(function () {
     });
 });
 
-var genreTags = $('#show_genre');
+
 
 function randomMovie() {
 

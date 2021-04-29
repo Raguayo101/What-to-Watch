@@ -10,8 +10,6 @@ var decadeBtn = document.querySelector('#decadeBtn')
 genreBtn.addEventListener('click', toggleGenre);
 // clear all checked boxes
 clearFilter.addEventListener('click', uncheckAll);
-// relocate to new page
-myFavPage.addEventListener('click', locationMyMovies);
 // toggles streambtn when clicked
 streamBtn.addEventListener('click', toggleStream);
 // toggles decades
@@ -48,11 +46,6 @@ function toggleDecade() {
 // Uncheck all checked boxes
 function uncheckAll() {
   $('input[type="checkbox"]:checked').prop('checked', false);
-}
-
-// relocate to page to saved movies. 
-function locationMyMovies() {
-  window.location.href = 'myfav.html'
 }
 
 
