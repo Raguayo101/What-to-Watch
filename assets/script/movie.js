@@ -46,7 +46,7 @@ function randomMovie() {
                 var movieId = data.results[randomResult].id;
                 // appends the poster
                 $('#show_poster').append(`
-                <img src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${data.results[randomResult].poster_path}" class="card-img-top" alt="..." style="max-width: fit-content; max-height:512px; border-radius:10px; margin-top: 30px;">
+                <img src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${data.results[randomResult].poster_path}" class="card-img-top" onerror=this.src="./assets/images/poster_not_found.png" style="max-width: fit-content; max-height:512px; border-radius:10px; margin-top: 30px;">
                  `);
                 
                  // appends the movie title
@@ -59,14 +59,19 @@ function randomMovie() {
                 $(document).ready(function () {
                     $("#bg").css("background-image", `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${data.results[randomResult].backdrop_path})`);
                 });
+
+                $('#show_release').append(`<p>${data.results[randomResult].release_date}<p>`);
+
+                $('#user_Rating').append(`<p>${data.results[randomResult].vote_average}/10<p>`);
                 
 
-                var movieURL = `https://api.themoviedb.org/3/movie/${data.results[randomResult].id}?api_key=2d68f36569896b3eca3f4d442ec3c9a3&language=en-US&append_to_response=credits,videos,watch/providers`
+                var movieURL = `https://api.themoviedb.org/3/movie/${data.results[randomResult].id}?api_key=2d68f36569896b3eca3f4d442ec3c9a3&language=en-US&append_to_response=credits,videos,watch/providers,rating`
                 fetch(movieURL)
                     .then(function (response) {
                         return response.json();
                     })
                     .then(function (response) {
+                        console.log(response);
             
                         // creating new array to set all tags in a single tag
                         var genreTag = []
@@ -79,6 +84,14 @@ function randomMovie() {
                         var genreNames = genreTag.join(', ');
                         // appending genre names
                         $('#show_genre').append(`<p>${genreNames}</p>`);
+
+                        // math to turn the runtime into hours and min. 
+                        var totalMin = response.runtime
+                        var hours = Math.floor(totalMin/60);
+                        var min = totalMin % 60;
+                        
+                        // appending runtime into moviepage
+                        $('#runTime').append(`<p>${hours}hr ${min}min<p>`);
 
                         // appending cast names
                         $('#actor1').append(response.credits.cast[0].name).css('font-weight', 'bold');
@@ -120,9 +133,11 @@ function randomMovie() {
                         $('#show_preview').append(`<iframe width="560" height="315" src="https://www.youtube.com/embed/${response.videos.results[0].key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
 
                         // appending streaming logo
-                        $('#stream_banner').append(`
-                        <img src="https://www.themoviedb.org/t/p/original/${response.watchProviders.results.US.flatrate[0].logo_path}"  alt="..." >
-                         `);
+                        // $('#stream_banner').append(`
+                        // <img src="https://www.themoviedb.org/t/p/original/${response.watchProviders.results.US.flatrate[0].logo_path}"  alt="..." >
+                        //  `);
+                        // Appending Release Date
+
                     });
 
 
