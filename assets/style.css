@@ -1,0 +1,45 @@
+
+
+#bg {
+background-repeat: no-repeat;
+background-position: center;
+height: 100%;
+width: 100%;
+background-image: linear-gradient(black, black, black);
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+}
+
+body{
+    color:whitesmoke;
+    box-sizing: border-box;
+
+}
+
+#card{
+    height: 100%;
+    word-wrap: break-word;
+}
+
+.banner{
+    background-color: cadetblue;
+    border-radius: 10px;
+    max-width: 220px;
+    height: vh;
+    position: relative;
+    bottom: 35px;
+    left: 200px;
+    opacity: 0.5;
+}
+
+.trailer{
+    position: relative;
+    bottom: 30px;
+    left: 78px;
+}
+/* 
+div.card {
+	min-width:140px;
+	width:140px;
+	/* max-height:0px; */
