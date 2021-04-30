@@ -10,8 +10,6 @@ var decadeBtn = document.querySelector('#decadeBtn')
 genreBtn.addEventListener('click', toggleGenre);
 // clear all checked boxes
 clearFilter.addEventListener('click', uncheckAll);
-// toggles streambtn when clicked
-streamBtn.addEventListener('click', toggleStream);
 // toggles decades
 decadeBtn.addEventListener('click', toggleDecade);
 
@@ -25,14 +23,6 @@ function toggleGenre() {
   }
 }
 
-function toggleStream() {
-  var x = document.querySelector("#streambox");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
 
 function toggleDecade() {
   var x = document.querySelector("#decadeBox");

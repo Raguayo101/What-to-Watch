@@ -20,6 +20,11 @@ footer {
 
 }
 
+.checkbox{
+    display:flex;
+    flex-wrap: wrap;
+}
+
 .container{
     max-width: none;
 }
