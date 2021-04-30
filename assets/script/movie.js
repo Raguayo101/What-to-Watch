@@ -2,23 +2,44 @@
 var movieButton = document.querySelector('#videobtn');
 var modalBkg = document.querySelector('.modal-background');
 var modal = document.querySelector('.modal');
-movieButton.addEventListener("click", function () {
-    modal.setAttribute("class", "modal is-active");
-});
-modalBkg.addEventListener("click", function () {
-    modal.setAttribute("class", "modal");
-});
-$(document).ready(function () {
-    $('.modal').each(function () {
-        var src = $(this).find('iframe').attr('src');
-        $(this).on('click', function () {
-            $(this).find('iframe').attr('src', '');
-            $(this).find('iframe').attr('src', src);
-        });
-    });
-});
 
+// movieButton.addEventListener("click", function () {
+//     modal.setAttribute("class", "modal is-active");
+// });
+// modalBkg.addEventListener("click", function () {
+//     modal.setAttribute("class", "modal");
+// });
+// $(document).ready(function () {
+//     $('.modal').pause().each(function () {
+//         var src = $(this).find('iframe').attr('src');
+//         $(this).find('iframe').reset();
+//         $(this).on('click', function () {
+//             $(this).find('iframe').attr('src', '');
+//             $(this).find('iframe').attr('src', src);
+//         });
+//     });
+// });
 
+var thief = new ColorThief();
+function getPalette(selector) {
+  var img = document.querySelector(selector)
+  var colors = thief.getColor(img);
+  var pallete = thief.getPalette(img, 8);
+  console.log(colors);
+  console.log(pallete); 
+  var P1 = pallete[0]
+  var P2 = pallete[1]
+  var P3 = pallete[2]
+  var colorRGBP1 = "rgb" + "(" + P1 + ")"
+  var red = colors[0]
+  var green = colors[1]
+  var blue = colors[2]
+  var colorRGB = "rgb" + "(" + red + ", " + green + ", " + blue + ")"  
+  document.body.style.backgroundColor = colorRGB
+  document.getElementById("footer").style.backgroundColor = colorRGBP1
+  document.getElementById("nav").style.backgroundColor = colorRGBP1
+  console.log(colorRGBP1)
+}
 
 function randomMovie() {
 
@@ -45,34 +66,49 @@ function randomMovie() {
                 console.log(data.results[randomResult])
                 var movieId = data.results[randomResult].id;
                 // appends the poster
-                $('#show_poster').append(`
-                <img src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${data.results[randomResult].poster_path}" class="card-img-top" onerror=this.src="./assets/images/poster_not_found.png" style="max-width: fit-content; max-height:512px; border-radius:10px; margin-top: 30px;">
+                
+                $('#show_Poster').append(`
+                <img src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${data.results[randomResult].poster_path}"  id="img" crossorigin="anonymous" onerror=this.src="./assets/images/poster_not_found.png" >
                  `);
-                
-                 // appends the movie title
-                $('#show_title').append(`${data.results[randomResult].title.toUpperCase()}`);
-                
+                 setTimeout(function () {
+                    getPalette("#img")
+                  }, 300)
+
+                // appends the movie title
+                $('#show_Title').append(`${data.results[randomResult].title.toUpperCase()}`);
+
                 // append movie desc.
-                $('#show_desc').append(`${data.results[randomResult].overview}`);
-                
+                $('#show_Desc').append(`${data.results[randomResult].overview}`);
+
                 // append the movie background
                 $(document).ready(function () {
                     $("#bg").css("background-image", `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${data.results[randomResult].backdrop_path})`);
                 });
 
-                $('#show_release').append(`<p>${data.results[randomResult].release_date}<p>`);
+                // appends the release date
+                $('#show_Release').append(`<p>${data.results[randomResult].release_date}<p>`);
 
+                // appends user rating
                 $('#user_Rating').append(`<p>${data.results[randomResult].vote_average}/10<p>`);
-                
 
-                var movieURL = `https://api.themoviedb.org/3/movie/${data.results[randomResult].id}?api_key=2d68f36569896b3eca3f4d442ec3c9a3&language=en-US&append_to_response=credits,videos,watch/providers,rating`
+                var recURL = `https://wendy-cors.herokuapp.com/https://tastedive.com/api/similar?q=${data.results[randomResult].original_title.toUpperCase()}&type=movies&limit=1&verbose=1&k=410241-WhattoWa-74TU2L6X`
+                fetch(recURL)
+                    .then(function (query) {
+                        return query.json();
+                    })
+                    .then(function (query) {
+                        console.log(query)
+                        $('#show_preview').append(`<iframe width="560" height="315" src="${query.Similar.Info[0].yUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
+                    })
+
+                var movieURL = `https://api.themoviedb.org/3/movie/${data.results[randomResult].id}?api_key=2d68f36569896b3eca3f4d442ec3c9a3&language=en-US&append_to_response=credits,videos,watch/providers,rating,similar`
                 fetch(movieURL)
                     .then(function (response) {
                         return response.json();
                     })
                     .then(function (response) {
                         console.log(response);
-            
+
                         // creating new array to set all tags in a single tag
                         var genreTag = []
                         for (var i = 0; i < response.genres.length; i++) {
@@ -82,14 +118,15 @@ function randomMovie() {
 
                         // joining array into a string
                         var genreNames = genreTag.join(', ');
+
                         // appending genre names
-                        $('#show_genre').append(`<p>${genreNames}</p>`);
+                        $('#show_Genre').append(`<p>${genreNames}</p>`);
 
                         // math to turn the runtime into hours and min. 
                         var totalMin = response.runtime
-                        var hours = Math.floor(totalMin/60);
+                        var hours = Math.floor(totalMin / 60);
                         var min = totalMin % 60;
-                        
+
                         // appending runtime into moviepage
                         $('#runTime').append(`<p>${hours}hr ${min}min<p>`);
 
@@ -100,7 +137,7 @@ function randomMovie() {
                         $('#actor4').append(response.credits.cast[3].name).css('font-weight', 'bold');
                         $('#actor5').append(response.credits.cast[4].name).css('font-weight', 'bold');
                         $('#actor6').append(response.credits.cast[5].name).css('font-weight', 'bold');
-                       
+
                         // appending characters the actors are playing. 
                         $('#character1').append(response.credits.cast[0].character);
                         $('#character2').append(response.credits.cast[1].character);
@@ -108,41 +145,56 @@ function randomMovie() {
                         $('#character4').append(response.credits.cast[3].character);
                         $('#character5').append(response.credits.cast[4].character);
                         $('#character6').append(response.credits.cast[5].character);
-                        
+
                         // appending movie actor poster
-                        $('#img_actor1').append(`
+                        $('#img_Actor1').append(`
                             <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[0].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
                              `);
-                        $('#img_actor2').append(`
+                        $('#img_Actor2').append(`
                              <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[1].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
                               `);
-                        $('#img_actor3').append(`
+                        $('#img_Actor3').append(`
                             <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[2].profile_path}" class="card-img-top" alt="..."  onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
                              `);
-                        $('#img_actor4').append(`
+                        $('#img_Actor4').append(`
                              <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[3].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
                               `);
-                        $('#img_actor5').append(`
+                        $('#img_Actor5').append(`
                               <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[4].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
                                `);
-                        $('#img_actor6').append(`
+                        $('#img_Actor6').append(`
                             <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[5].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
                             `);
 
-                        //appending  trailer from youtube
-                        $('#show_preview').append(`<iframe width="560" height="315" src="https://www.youtube.com/embed/${response.videos.results[0].key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
 
-                        // appending streaming logo
-                        // $('#stream_banner').append(`
-                        // <img src="https://www.themoviedb.org/t/p/original/${response.watchProviders.results.US.flatrate[0].logo_path}"  alt="..." >
-                        //  `);
-                        // Appending Release Date
+                        console.log(response["watch/providers"].results.US.flatrate);
+                        console.log(response["watch/providers"].results.US.buy);
+                        console.log(response["watch/providers"].results.US.buy[0].logo_path);
+
+                        // appending watch provider logo
+                        if (response["watch/providers"].results.US.flatrate) {
+
+                            $('#platform_Name').append(`<h1 class ="is-size-5">${response["watch/providers"].results.US.flatrate[0].provider_name}</h1>`);
+
+                            $('#platform_Logo').append(`
+                            <img src="https://www.themoviedb.org/t/p/original${response["watch/providers"].results.US.flatrate[0].logo_path}"  alt="..." >
+                             `);
+                        }
+
+                        else {
+                            $('#platform_Name').append(`<h1 class ="is-size-5">${response["watch/providers"].results.US.buy[0].provider_name}</h1>`);
+
+                            $('#platform_Logo').append(`
+                         <img src="https://www.themoviedb.org/t/p/original${response["watch/providers"].results.US.buy[0].logo_path}"  alt="..." >
+                          `);
+
+                        }
 
                     });
 
 
             })
-           
+
         })
 
 };

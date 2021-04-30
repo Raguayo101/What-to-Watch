@@ -3,43 +3,84 @@
 #bg {
 background-repeat: no-repeat;
 background-position: center;
-height: 100%;
-width: 100%;
-background-image: linear-gradient(black, black, black);
 display: flex;
-justify-content: center;
+background-size: cover;
 flex-wrap: wrap;
+filter: drop-shadow(2px 4px 6px black);
 }
 
-body{
+header{
+    padding-bottom: 30px;
+}
+
+footer {
     color:whitesmoke;
     box-sizing: border-box;
+    
 
 }
 
-#card{
-    height: 100%;
-    word-wrap: break-word;
+.container{
+    max-width: none;
 }
 
-.banner{
-    background-color: cadetblue;
-    border-radius: 10px;
-    max-width: 220px;
-    height: vh;
-    position: relative;
-    bottom: 35px;
-    left: 200px;
-    opacity: 0.5;
+.width{
+    max-width: 138px;
+ }
+
+
+ .message-body{
+     max-width: fit-content;
+     color:whitesmoke;
+     box-sizing: border-box;
+     text-shadow:
+         0.07em 0 black,
+         0 0.07em black,
+         -0.07em 0 black,
+         0 -0.07em black;
+ 
+ }
+
+ .message-header{
+     background-color: none;
+     max-width: 135px;
+     display: flex; 
+     justify-content: center;
+     opacity: .8;
+ }
+
+ 
+
+
+.card{
+    border-radius: 1.25rem;
+    filter: drop-shadow(2px 4px 6px black);
 }
 
-.trailer{
-    position: relative;
-    bottom: 30px;
-    left: 78px;
+
+.white-text{
+    color:whitesmoke;
+    box-sizing: border-box;
+    text-shadow:
+        0.07em 0 black,
+        0 0.07em black,
+        -0.07em 0 black,
+        0 -0.07em black;
+
 }
-/* 
-div.card {
-	min-width:140px;
-	width:140px;
-	/* max-height:0px; */
+
+/* #show_title{
+    color: whitesmoke;
+    text-shadow:
+        0.07em 0 black,
+        0 0.07em black,
+        -0.07em 0 black,
+        0 -0.07em black;
+} */
+
+
+
+
+
+
+
