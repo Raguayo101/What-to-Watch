@@ -16,6 +16,11 @@ $("#modal-Bg").click(function () {
 
 })
 
+// stops the video when exiting the modal
+$("#myModal").on('click', function (e) {
+    $("#myModal iframe").attr("src", $("#myModal iframe").attr("src"));
+});
+
 
 // Generates color pallet from poster img, gets called in function randomMovie
 var thief = new ColorThief();
