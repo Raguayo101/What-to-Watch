@@ -46,7 +46,7 @@ function randomMovie() {
     // gets the stored values from the checkboxes
     var selected = localStorage.getItem('checked');
 
-    var apiURL = `https://api.themoviedb.org/3/discover/movie?api_key=2d68f36569896b3eca3f4d442ec3c9a3&language=en-US&sort_by=popularity.desc&vote_count.gte=50&certification_country=US&include_adult=false&watch_region=US` + selected;
+    var apiURL = `https://api.themoviedb.org/3/discover/movie?api_key=2d68f36569896b3eca3f4d442ec3c9a3&language=en-US&sort_by=popularity.desc&vote_count.gte=10&with_original_language=en&certification_country=US&include_adult=false&watch_region=US` + selected;
     fetch(apiURL)
         .then(function (data) {
             return data.json();
@@ -66,13 +66,16 @@ function randomMovie() {
                 console.log(data.results[randomResult])
                 var movieId = data.results[randomResult].id;
                 // appends the poster
-                
+                if(data.results[randomResult]){
                 $('#show_Poster').append(`
                 <img src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${data.results[randomResult].poster_path}"  id="img" crossorigin="anonymous" onerror=this.src="./assets/images/poster_not_found.png" >
                  `);
                  setTimeout(function () {
                     getPalette("#img")
                   }, 300)
+                }else{$('#show_Poster').append(`
+                <img src="./assets/images/poster_not_found.png"  id="img" crossorigin="anonymous">
+                 `);} 
 
                 // appends the movie title
                 $('#show_Title').append(`${data.results[randomResult].title.toUpperCase()}`);
@@ -81,9 +84,13 @@ function randomMovie() {
                 $('#show_Desc').append(`${data.results[randomResult].overview}`);
 
                 // append the movie background
-                $(document).ready(function () {
-                    $("#bg").css("background-image", `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${data.results[randomResult].backdrop_path})`);
-                });
+                if (data.results[randomResult].backdrop_path){
+                    $(document).ready(function () {
+                        $("#bg").css("background-image", `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${data.results[randomResult].backdrop_path})`);
+                    });
+                }   else {
+                    $("#bg").css("background-image", `url(https://wallpaperaccess.com/full/1129018.jpg)`);
+                }
 
                 // appends the release date
                 $('#show_Release').append(`<p>${data.results[randomResult].release_date}<p>`);
@@ -131,64 +138,157 @@ function randomMovie() {
                         $('#runTime').append(`<p>${hours}hr ${min}min<p>`);
 
                         // appending cast names
-                        $('#actor1').append(response.credits.cast[0].name).css('font-weight', 'bold');
-                        $('#actor2').append(response.credits.cast[1].name).css('font-weight', 'bold');
-                        $('#actor3').append(response.credits.cast[2].name).css('font-weight', 'bold');
-                        $('#actor4').append(response.credits.cast[3].name).css('font-weight', 'bold');
-                        $('#actor5').append(response.credits.cast[4].name).css('font-weight', 'bold');
-                        $('#actor6').append(response.credits.cast[5].name).css('font-weight', 'bold');
+                        if(response.credits.cast[0]){
+                            $('#actor1').append(response.credits.cast[0].name).css('font-weight', 'bold');
+                        }else{$('#actor1').append('no-cast').css('font-weight', 'bold');}
+                        
+                        if(response.credits.cast[1]){
+                            $('#actor2').append(response.credits.cast[1].name).css('font-weight', 'bold');
+                        }else{$('#actor2').append('no-cast').css('font-weight', 'bold');}
+                        
+                        if(response.credits.cast[2]){
+                            $('#actor3').append(response.credits.cast[2].name).css('font-weight', 'bold');
+                        }else{$('#actor3').append('no-cast').css('font-weight', 'bold');}
+                        
+                        if(response.credits.cast[3]){
+                            $('#actor4').append(response.credits.cast[3].name).css('font-weight', 'bold');
+                        }else{$('#actor4').append('no-cast').css('font-weight', 'bold');}
+                        
+                        if(response.credits.cast[4]){
+                            $('#actor5').append(response.credits.cast[4].name).css('font-weight', 'bold');
+                        }else{$('#actor5').append('no-cast').css('font-weight', 'bold');}
+                        
+                        if(response.credits.cast[5]){
+                            $('#actor6').append(response.credits.cast[5].name).css('font-weight', 'bold');
+                        }else{$('#actor6').append('no-cast').css('font-weight', 'bold');}
+                        
 
                         // appending characters the actors are playing. 
-                        $('#character1').append(response.credits.cast[0].character);
-                        $('#character2').append(response.credits.cast[1].character);
-                        $('#character3').append(response.credits.cast[2].character);
-                        $('#character4').append(response.credits.cast[3].character);
-                        $('#character5').append(response.credits.cast[4].character);
-                        $('#character6').append(response.credits.cast[5].character);
+                        if(response.credits.cast[0]){
+                            $('#character1').append(response.credits.cast[0].character);
+                        }else{}
+                        if(response.credits.cast[1]){
+                            $('#character2').append(response.credits.cast[1].character);
+                        }else{}
+                        if(response.credits.cast[2]){
+                            $('#character3').append(response.credits.cast[2].character);
+                        }else{}
+                        if(response.credits.cast[3]){
+                            $('#character4').append(response.credits.cast[3].character);
+                        }else{}
+                        if(response.credits.cast[4]){
+                            $('#character5').append(response.credits.cast[4].character);
+                        }else{}
+                        if(response.credits.cast[5]){
+                            $('#character6').append(response.credits.cast[5].character);
+                        }else{}
+
 
                         // appending movie actor poster
-                        $('#img_Actor1').append(`
-                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[0].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
-                             `);
-                        $('#img_Actor2').append(`
-                             <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[1].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
-                              `);
-                        $('#img_Actor3').append(`
-                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[2].profile_path}" class="card-img-top" alt="..."  onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
-                             `);
-                        $('#img_Actor4').append(`
-                             <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[3].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
-                              `);
-                        $('#img_Actor5').append(`
-                              <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[4].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
-                               `);
-                        $('#img_Actor6').append(`
-                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[5].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
-                            `);
+                            if(response.credits.cast[0]){
+                                $('#img_Actor1').append(`
+                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[0].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg">
+                             `); 
+                            }else{$('#img_Actor1').append(`
+                            <img src="./assets/images/altheadshot.jpg" class="card-img-top" >
+                             `);}
+
+                            if(response.credits.cast[1]){
+                                $('#img_Actor2').append(`
+                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[1].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" >
+                             `); 
+                            }else{$('#img_Actor2').append(`
+                            <img src="./assets/images/altheadshot.jpg" class="card-img-top" >
+                             `);}
+
+                            if(response.credits.cast[2]){
+                                $('#img_Actor3').append(`
+                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[2].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg"> 
+                             `); 
+                            }else{$('#img_Actor3').append(`
+                            <img src="./assets/images/altheadshot.jpg" class="card-img-top" >
+                             `);}
+
+                            if(response.credits.cast[3]){
+                                $('#img_Actor4').append(`
+                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[3].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg">
+                             `); 
+                            }else{$('#img_Actor4').append(`
+                            <img src="./assets/images/altheadshot.jpg" class="card-img-top" >
+                             `);}
+
+                            if(response.credits.cast[4]){
+                                $('#img_Actor5').append(`
+                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[4].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" >
+                             `); 
+                            }else{$('#img_Actor5').append(`
+                            <img src="./assets/images/altheadshot.jpg" class="card-img-top" >
+                             `);}
+
+                            if(response.credits.cast[5]){
+                                $('#img_Actor6').append(`
+                            <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[5].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" >
+                             `); 
+                            }else{   $('#img_Actor6').append(`
+                            <img src="./assets/images/altheadshot.jpg" class="card-img-top" >
+                             `);}
 
 
-                        console.log(response["watch/providers"].results.US.flatrate);
-                        console.log(response["watch/providers"].results.US.buy);
-                        console.log(response["watch/providers"].results.US.buy[0].logo_path);
-
-                        // appending watch provider logo
-                        if (response["watch/providers"].results.US.flatrate) {
-
+                            // $('#img_Actor1').append(`
+                            // <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[0].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
+                            //  `);                       
+                            
+                            //  $('#img_Actor2').append(`
+                            // <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[1].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
+                            //  `);
+                       
+                       
+                            // $('#img_Actor3').append(`
+                            // <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[2].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
+                            //  `);
+                       
+                        
+                            // $('#img_Actor4').append(`
+                            // <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[3].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
+                            //  `);
+                        
+                        
+                            // $('#img_Actor5').append(`
+                            // <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[4].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
+                            //  `);
+                                              
+                            // $('#img_Actor6').append(`
+                            // <img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${response.credits.cast[5].profile_path}" class="card-img-top" alt="..." onerror=this.src="./assets/images/altheadshot.jpg" style="max-width: fit-content; max-height:175px; border-radius:10px;">
+                            //  `);
+                        
+                                                                        
+                        // appending watch provider logo and name
+                        if(response["watch/providers"].results.US){                                         
+                        if(response["watch/providers"].results.US.flatrate){
                             $('#platform_Name').append(`<h1 class ="is-size-5">${response["watch/providers"].results.US.flatrate[0].provider_name}</h1>`);
 
                             $('#platform_Logo').append(`
-                            <img src="https://www.themoviedb.org/t/p/original${response["watch/providers"].results.US.flatrate[0].logo_path}"  alt="..." >
-                             `);
-                        }
+                         <img src="https://www.themoviedb.org/t/p/original${response["watch/providers"].results.US.flatrate[0].logo_path}"  alt="..." >
+                          `);
+                        }else{}
 
-                        else {
-                            $('#platform_Name').append(`<h1 class ="is-size-5">${response["watch/providers"].results.US.buy[0].provider_name}</h1>`);
+                        if(response["watch/providers"].results.US.ads){
+                            $('#platform_Name').append(`<h1 class ="is-size-5">${response["watch/providers"].results.US.ads[0].provider_name}</h1>`);
 
                             $('#platform_Logo').append(`
-                         <img src="https://www.themoviedb.org/t/p/original${response["watch/providers"].results.US.buy[0].logo_path}"  alt="..." >
+                         <img src="https://www.themoviedb.org/t/p/original${response["watch/providers"].results.US.ads[0].logo_path}"  alt="..." >
                           `);
+                        }else{}
 
-                        }
+                        if(response["watch/providers"].results.US.rent){
+                            $('#platform_Name').append(`<h1 class ="is-size-5">${response["watch/providers"].results.US.rent[0].provider_name}</h1>`);
+
+                            $('#platform_Logo').append(`
+                         <img src="https://www.themoviedb.org/t/p/original${response["watch/providers"].results.US.rent[0].logo_path}"  alt="..." >
+                          `);
+                        }else{}
+                    }else{}   
+                        
 
                     });
 

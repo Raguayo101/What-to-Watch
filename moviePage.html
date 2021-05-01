@@ -13,10 +13,10 @@
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <title>Document</title>
 </head>
-<header>
+<header class = "header-padding">
     <nav class="navbar" role="navigation" aria-label="main navigation" id="nav">
         <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
+            <a class="navbar-item" href="index.html">
                 <img src="./assets/images/what_to_watch.png" width="112" height="28">
             </a>
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
@@ -36,7 +36,7 @@
 
 <!--without div container-->
 
-<body>
+<body class = "homepage-color">
     <main>
         <Section id="bg">
             <div class="container">
@@ -51,26 +51,27 @@
                             <!-- for 'now streaming' section -->
                             <div class="card-content">
                                 <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4" id="platform_Name">Where to watch</p>
+                                    </div>
                                     <div class="media-left">
                                         <figure class="image is-48x48" id='platform_Logo'> </figure>
                                     </div>
-                                    <div class="media-content">
-                                        <button class="button"> Play Trailer</button>
-                                        <p class="title is-4" id="platform_Name">Where to watch</p>
-                                    </div>
                                 </div>
+                                <!-- trailer button -->
+                                <button class="button"> Play Trailer</button>
                             </div>
                         </div>
                     </div>
                     <div class="column is-9">
                         <!-- for title of movie -->
-                        <div class="card my-3 has-text-centered" style="max-width: fit-content;">
+                        <div class="card my-3 has-text-centered is-size-4 title-width" id = "mobile-title" >
                             <header class="card-header">
-                                <p class="card-header-title" id="show_Title"></p>
+                                <p class="card-header-title " id="show_Title"></p>
                             </header>
                         </div>
                         <!-- appened Genres -->
-                        <article class="has-text-centered is-centered">
+                        <article class="has-text-centered is-centered is-size-5 mobile-tags">
                             <div class="message-header is-centered">
                                 <p>Genre</p>
                             </div>
@@ -99,7 +100,7 @@
 
                             <!-- appending movie summary -->
 
-                            <div class="message-header is-centered">
+                            <div class="message-header is-centered ">
                                 <p>Overview</p>
                             </div>
                             <div class="message-body has-text-centered" id="show_Desc"></div>
@@ -109,7 +110,7 @@
             </div>
         </Section>
         
-        <section class = "section">
+        <section class = "section mobile-cast">
             <div class = "container">
         <!-- appending actor cards -->
         <div class="columns  is-centered">
