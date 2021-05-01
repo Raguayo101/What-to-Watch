@@ -36,7 +36,6 @@ function getPalette(selector) {
     document.body.style.backgroundColor = colorRGB
     document.getElementById("footer").style.backgroundColor = colorRGBP1
     document.getElementById("nav").style.backgroundColor = colorRGBP1
-    console.log(colorRGBP1)
 }
 
 function randomMovie() {
@@ -103,7 +102,15 @@ function randomMovie() {
                     })
                     .then(function (query) {
                         console.log(query)
+                        
+                        if(query.Similar.Info){
                         $('#show_Trailer').append(`<iframe width="560" height="315" src="${query.Similar.Info[0].yUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
+                        }
+                        else{
+                            $('#show_Trailer').append(`
+                            <img src="./assets/images/no_trailer.png"  alt = "no trailer">
+                             `);
+                        }   
                     })
 
                     // pulls the ID from data results above and pulls the extra details from the random movie (cast,characters ect.)
