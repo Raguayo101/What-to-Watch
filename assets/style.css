@@ -8,6 +8,21 @@ flex-wrap: wrap;
 filter: drop-shadow(2px 4px 6px black);
 }
 
+/* increases size of WTW logo on nav bar */
+.navbar-item img {
+    max-height: 4.7rem;
+}
+
+.nav-text{
+    color:whitesmoke;
+     box-sizing: border-box;
+     text-shadow:
+         0.07em 0 black,
+         0 0.07em black,
+         -0.07em 0 black,
+         0 -0.07em black;
+}
+
 .header-padding{
     padding-bottom: 30px;
 }

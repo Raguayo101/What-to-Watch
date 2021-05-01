@@ -13,11 +13,11 @@
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <title>Document</title>
 </head>
-<header class = "header-padding">
+<header class="header-padding">
     <nav class="navbar" role="navigation" aria-label="main navigation" id="nav">
         <div class="navbar-brand">
             <a class="navbar-item" href="index.html">
-                <img src="./assets/images/what_to_watch.png" width="112" height="28">
+                <img src="./assets/images/what_to_watch.png">
             </a>
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
                 data-target="navbarBasicExample">
@@ -28,7 +28,7 @@
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" onclick="window.location.href='index.html'">
+                <a class="navbar-item nav-text" onclick="window.location.href='index.html'">
                     Home
                 </a>
             </div>
@@ -36,7 +36,7 @@
 
 <!--without div container-->
 
-<body class = "homepage-color">
+<body class="homepage-color">
     <main>
         <Section id="bg">
             <div class="container">
@@ -59,13 +59,15 @@
                                     </div>
                                 </div>
                                 <!-- trailer button -->
-                                <button class="button"> Play Trailer</button>
+                                <button class="button" id = "trailer-Btn"> Play Trailer</button>
                             </div>
                         </div>
                     </div>
+
+                    
                     <div class="column is-9">
                         <!-- for title of movie -->
-                        <div class="card my-3 has-text-centered is-size-4 title-width" id = "mobile-title" >
+                        <div class="card my-3 has-text-centered is-size-4 title-width" id="mobile-title">
                             <header class="card-header">
                                 <p class="card-header-title " id="show_Title"></p>
                             </header>
@@ -109,106 +111,116 @@
                 </div>
             </div>
         </Section>
-        
-        <section class = "section mobile-cast">
-            <div class = "container">
-        <!-- appending actor cards -->
-        <div class="columns  is-centered">
-            <div class="column">
-                <div class="columns">
+
+        <section class="section mobile-cast">
+            <div class="container">
+                <!-- appending actor cards -->
+                <div class="columns  is-centered">
                     <div class="column">
-                        <div class="card bd-notification is-info width">
-                            <div class="card-image">
-                                <!-- appened actor poster -->
-                                <figure class="image" id="img_Actor1"></figure>
+                        <div class="columns">
+                            <div class="column">
+                                <div class="card bd-notification is-info width">
+                                    <div class="card-image">
+                                        <!-- appened actor poster -->
+                                        <figure class="image" id="img_Actor1"></figure>
+                                    </div>
+                                    <div class="card-content">
+                                        <!-- appended actor name -->
+                                        <div id='actor1'></div>
+                                        <!-- appended actor characters in movie -->
+                                        <div id="character1"></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-content">
-                                <!-- appended actor name -->
-                                <div id='actor1'></div>
-                                <!-- appended actor characters in movie -->
-                                <div id="character1"></div>
+                            <div class="column">
+                                <div class="card bd-notification is-info width">
+                                    <div class="card-image">
+                                        <!-- appened actor poster -->
+                                        <figure class="image" id="img_Actor2"></figure>
+                                    </div>
+                                    <div class="card-content">
+                                        <!-- appended actor name -->
+                                        <div id='actor2'></div>
+                                        <!-- appended actor characters in movie -->
+                                        <div id="character2"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="card bd-notification is-info width">
-                            <div class="card-image">
-                                <!-- appened actor poster -->
-                                <figure class="image" id="img_Actor2"></figure>
+                            <div class="column">
+                                <div class="card bd-notification is-info width">
+                                    <div class="card-image">
+                                        <!-- appened actor poster -->
+                                        <figure class="image" id="img_Actor3"></figure>
+                                    </div>
+                                    <div class="card-content">
+                                        <!-- appended actor name -->
+                                        <div id='actor3'></div>
+                                        <!-- appended actor characters in movie -->
+                                        <div id="character3"></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-content">
-                                <!-- appended actor name -->
-                                <div id='actor2'></div>
-                                <!-- appended actor characters in movie -->
-                                <div id="character2"></div>
+                            <div class="column">
+                                <div class="card bd-notification is-info width">
+                                    <div class="card-image">
+                                        <!-- appened actor poster -->
+                                        <figure class="image" id="img_Actor4"></figure>
+                                    </div>
+                                    <div class="card-content">
+                                        <!-- appended actor name -->
+                                        <div id='actor4'></div>
+                                        <!-- appended actor characters in movie -->
+                                        <div id="character4"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="card bd-notification is-info width">
-                            <div class="card-image">
-                                <!-- appened actor poster -->
-                                <figure class="image" id="img_Actor3"></figure>
+                            <div class="column">
+                                <div class="card bd-notification is-info width">
+                                    <div class="card-image">
+                                        <!-- appened actor poster -->
+                                        <figure class="image" id="img_Actor5"></figure>
+                                    </div>
+                                    <div class="card-content">
+                                        <!-- appended actor name -->
+                                        <div id='actor5'></div>
+                                        <!-- appended actor characters in movie -->
+                                        <div id="character5"></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-content">
-                                <!-- appended actor name -->
-                                <div id='actor3'></div>
-                                <!-- appended actor characters in movie -->
-                                <div id="character3"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="card bd-notification is-info width">
-                            <div class="card-image">
-                                <!-- appened actor poster -->
-                                <figure class="image" id="img_Actor4"></figure>
-                            </div>
-                            <div class="card-content">
-                                <!-- appended actor name -->
-                                <div id='actor4'></div>
-                                <!-- appended actor characters in movie -->
-                                <div id="character4"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="card bd-notification is-info width">
-                            <div class="card-image">
-                                <!-- appened actor poster -->
-                                <figure class="image" id="img_Actor5"></figure>
-                            </div>
-                            <div class="card-content">
-                                <!-- appended actor name -->
-                                <div id='actor5'></div>
-                                <!-- appended actor characters in movie -->
-                                <div id="character5"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="card bd-notification is-info width">
-                            <div class="card-image">
-                                <!-- appened actor poster -->
-                                <figure class="image" id="img_Actor6"></figure>
-                            </div>
-                            <div class="card-content">
-                                <!-- appended actor name -->
-                                <div id='actor6'></div>
-                                <!-- appended actor characters in movie -->
-                                <div id="character6"></div>
+                            <div class="column">
+                                <div class="card bd-notification is-info width">
+                                    <div class="card-image">
+                                        <!-- appened actor poster -->
+                                        <figure class="image" id="img_Actor6"></figure>
+                                    </div>
+                                    <div class="card-content">
+                                        <!-- appended actor name -->
+                                        <div id='actor6'></div>
+                                        <!-- appended actor characters in movie -->
+                                        <div id="character6"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <div class="modal">
+            <div class="modal-background" id = "modal-Bg"></div>
+            <div class="modal-content">
+                <div id = "show_Trailer"></div>
+                <button class="modal-close is-large" aria-label="close" id = "exit-ModalBtn" onclick="document.getElementById('show_trailer').pause();"></button>
+            </div>
         </div>
-    </div>
-    </section>
-        <footer class="footer" id="footer" style = "padding:0;">
+
+        <!-- footer for TMDB credit -->
+        <footer class="footer" id="footer" style="padding:0;">
             <div class="content has-text-centered">
                 <img src="./assets/images/TMDB_Logo.png" alt="TMDB Logo" style="width: 5%;" class="my-2">
-                <p class='is-size-7' style="color: black;">
+                <p class='is-size-7 ' style="color: rgb(255, 255, 255);">
                     This product uses the TMDb API but is not endorsed or certified by TMDb.
                 </p>
             </div>

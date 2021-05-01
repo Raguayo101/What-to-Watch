@@ -23,7 +23,7 @@ function toggleGenre() {
   }
 }
 
-
+// toggles decade hide/show
 function toggleDecade() {
   var x = document.querySelector("#decadeBox");
   if (x.style.display === "none") {
@@ -39,7 +39,7 @@ function uncheckAll() {
 }
 
 
-
+// stores the user info into arrays and into local storage, sends user to next page
 $("#movieBtn").click(function () {
   var selected = new Array();
 
@@ -58,10 +58,7 @@ $("#movieBtn").click(function () {
 
   localStorage.setItem('checked', genreString);
 
-  console.log(localStorage);
-
-  console.log(genreString);
-
+//  relocate to moviePage
   window.location.href = 'moviePage.html';
 
 });
